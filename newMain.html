@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <title>Resume Generator</title>
+    <style>
+        body {
+            padding: 25px;
+            background-color: white;
+            color: black
+        }
+
+
+
+        .dark-mode {
+            background-color: black;
+            color: white;
+        }
+
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+            position: -webkit-sticky;
+            /* Safari */
+            position: sticky;
+            top: 0;
+        }
+
+
+
+        li {
+            float: left;
+        }
+
+
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 10px 10px;
+            text-decoration: none;
+        }
+
+
+
+        li a:hover {
+            background-color: #111;
+        }
+
+
+
+        .active {
+            background-color: #4CAF50;
+        }
+
+        .nav-cont {
+            display: flex;
+            list-style-type: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #666;
+        }
+
+        #anchor:hover {
+            color: white;
+        }
+
+        .nav-item {
+            padding: 1em;
+        }
+
+        h3 {
+            margin-left: 40px;
+            margin-right: auto;
+        }
+
+        input[type=submit] {
+            display: block;
+            background-color: grey;
+            margin: 0 auto;
+            border: red;
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #dw {
+
+
+
+            background-color: grey;
+            border: none;
+            margin: 0 auto;
+            color: white;
+            padding: 10px 10px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+     
+
+      <h1 style="text-align: center">Resume Generator</h1>
+
+     
+
+     
+
+
+    <ul class="nav-cont">
+
+         
+
+            <li class="nav-item"><a href="#personal-details" id="anchor">Personal details</a></li>
+
+         
+
+            <li class="nav-item"><a href="#obj1" id="anchor">Objective</a></li>
+
+         
+
+            <li class="nav-item"><a href="#acad" id="anchor">Academic Details</a></li>
+
+         
+
+            <li class="nav-item"><a href="#skills" id="anchor">Skills</a></li>
+
+         
+
+            <li class="nav-item"><a href="#pr1" id="anchor">Projects</a></li>
+
+         
+
+            <li class="nav-item"><a href="#languages" id="anchor">Languages</a></li>
+
+         
+
+            <li class="nav-item">
+
+             
+
+                  <button id="dw" onclick="myFunction()" style="float: right">
+
+                 
+
+                        Toggle dark mode
+
+                 
+
+                      </button>
+
+             
+
+                </li>
+
+         
+
+          </ul>
+
+     
+
+     
+
+
+    <form id="form" name="myForm" method="GET" action="newFinal.html">
+
+         
+
+            <div class="personal-details" id="personal-details">
+
+             
+
+                  <h3 id="details">Personal Details</h3>
+
+             
+
+                  <div style="margin-left: 60px; margin-right: auto">
+
+                 
+
+                        <div>
+
+                     
+
+                              Photo:
+
+                     
+
+                              <input type="file" id="file" accept="image/*" onchange="_ReadImage()" />
+                    <p><img id="output" width="200" style="vertical-align: top; float: right; " /></p>
+                </div>
+
+                 
+
+                        <p><img id="output" width="200" style="vertical-align: top; float: right; " /></p>
+                <input type="button" id="load" value="Preview" onclick="_LoadImage()">
+
+                 
+
+                        <div class="form-element">
+
+                     
+
+                              <label for="name">Name: </label>
+
+                     
+
+                              <input type="text" id="name" placeholder="your name" style="border: 2px solid black;" />
+
+                     
+
+                              <span id="name-error"></span>
+
+                     
+
+                            </div>
+
+                 
+
+                 
+
+
+                <div class="form-element">
+
+                     
+
+                              <label for="email">Email:</label>
+
+                     
+
+                              <input type="email" id="email" name="email" placeholder="Your Email" />
+
+                     
+
+                            </div>
+
+                 
+
+                 
+
+
+                <div class="form-element">
+
+                     
+
+                              <label for="phone">Phone:</label>
+
+                     
+
+                              <input type="tel" id="phone" placeholder="Phone number" maxlength="10" />
+
+                     
+
+                            </div>
+
+                 
+
+                     
+            </div>
+
+             
+
+                </div>
+
+         
+
+         
+
+
+        <div class="objective" id="objective">
+
+             
+
+                  <h3>Objective</h3>
+
+             
+
+                  <textarea id="obj" name="objective" rows="5" cols="100"
+                placeholder="Enter your career Objective here! "
+                style="margin-left: 60px; margin-right: auto"></textarea>
+
+             
+
+                </div>
+
+         
+
+         
+
+
+        <div class="academic-details" id="academic-details">
+
+             
+
+                  <h3> Academic details </h3>
+            <div style="margin-left: 60px; margin-right: auto;">
+                <div id="acadDetails">
+                    <div class="details">
+                        <label>Course:</label><input type="text" name="deg[]" placeholder="Your course/degree"
+                            class="input">
+                        <label>College:</label><input type="text" name="clg[]" placeholder="University/college name"
+                            class="input">
+                        <label>Score:</label><input type="text" name="score[]" placeholder="Your Score/Grade"
+                            class="input">
+                        <label>Passing year:</label><input type="number" name="pyear[]" placeholder="Passing year"
+                            min="1980" max="2023" class="input">
+                    </div>
+                </div>
+                <button type="button" id="addAcad">Add</button>
+            </div>
+
+             
+
+             
+
+
+            <div class="skills" id="skills">
+
+                 
+
+                        <h3> Skills </h3>
+
+                 
+
+                        <div style="margin-left: 60px; margin-right: auto;" class="skill">
+
+                     
+
+                              <div>
+
+                         
+
+                                    <label for="skill1">Skill1:</label>
+
+                         
+
+                                    <select name="skill1[]" id="skill1">
+
+                             
+
+                                          <option disabled selected value> -- select an option -- </option>
+
+                             
+
+                                          <option value="c">C</option>
+
+                             
+
+                                          <option value="c++">C++</option>
+
+                             
+
+                                      <option value="Java">Java</option>
+
+                             
+
+                                          <option value="Python">Python</option>
+
+                             
+
+                                          <option value="HTML">HTML</option>
+
+                             
+
+                                          <option value="CSS">CSS</option>
+
+                             
+
+                                          <option value="JavaScript">JavaScript</option>
+
+                             
+
+                                          <option value="TypeScript">TypeScript</option>
+
+                             
+
+                                          <option value="Angular">Angular</option>
+
+                             
+
+                                          <option value="React">React</option>
+
+                             
+
+                                      <option value="others">Others</option>
+
+                             
+
+                                        </select>
+
+                    </div>
+
+                     
+
+                            </div>
+
+                 
+
+                        <button type="button" id="addSkill">Add</button>
+
+                 
+
+                      </div>
+
+             
+
+             
+
+             
+
+                  <div class="projects" id="projects">
+
+                 
+
+                        <h3> Projects </h3>
+
+                 
+
+                        <div style="margin-left: 60px; margin-right: auto;" id="project">
+
+                     
+
+                              <div class="project">
+
+                         
+
+                                    Title 1: <input type="text" id="project1" name="project1[]"
+                            placeholder="Project Title">
+                        <br>
+                                    Description: <br>
+                        <textarea id="desc1" name="p1d1[]" style="margin-left: 60px; margin-right: auto;" rows="5"
+                            cols="100" placeholder="Enter Project details!"></textarea>
+
+                         
+
+                                 
+                    </div>
+
+                     
+
+                            </div>
+
+                 
+
+                        <button type="button" id="addProject">Add</button>
+
+                 
+
+                      </div>
+
+             
+
+             
+
+
+            <div class="languages" id="languages">
+
+                 
+
+                        <h3> Languages </h3>
+
+                 
+
+                        <div style="margin-left: 60px; margin-right: auto;" class="lang">
+
+                     
+
+                              <div class="language">
+
+                         
+
+                                    <label for="lang1">Language1:</label>
+
+                         
+
+                                    <select name="lang1[]" id="lang1">
+
+                             
+
+                                          <option disabled selected value> -- select an option -- </option>
+
+                             
+
+                                          <option value="English">English</option>
+
+                             
+
+                                          <option value="Tamil">Tamil</option>
+
+                             
+
+                                          <option value="Telugu">Telugu</option>
+
+                             
+
+                                          <option value="Hindi">Hindi</option>
+
+                             
+
+                                          <option value="Kannada">Kannada</option>
+
+                             
+
+                                        </select>
+
+                         
+
+                                  </div>
+
+                     
+
+                            </div>
+
+                 
+
+                        <button type="button" id="addLanguage">Add</button>
+
+                 
+
+                      </div>
+
+             
+
+             
+
+
+            <button type="submit">Submit</button>
+
+             
+
+             
+    </form>
+    <script>
+
+
+
+
+
+
+        const _ReadImage = () => {
+
+
+
+            let f = document.querySelector("#file");
+
+
+
+            if (f.files && f.files[0]) {
+
+
+
+                var reader = new FileReader();
+
+
+
+                reader.onload = (e) => {
+
+
+
+                    _SaveImage(e.target.result);
+
+
+
+                };
+
+
+
+                reader.readAsDataURL(f.files[0]);
+
+
+
+            }
+
+
+
+        };
+
+
+
+        const _SaveImage = (img) => {
+
+
+
+            localStorage.setItem("img", img);
+
+
+
+            console.log("saved");
+
+
+
+        };
+
+
+
+        const _LoadImage = () => {
+            if (localStorage.getItem("img")) {
+                console.log("pass");
+                document.querySelector("#output").src = localStorage.getItem("img");
+                console.log("success");
+
+
+
+                console.log("done");
+            }
+            else {
+                console.log("failed");
+            }
+        }
+
+
+
+
+
+
+        function myFunction() {
+
+
+
+            var element = document.body;
+
+
+
+            element.classList.toggle("dark-mode");
+
+
+
+        }
+
+
+
+        const nameInput = document.getElementById("name");
+
+
+
+        const nameError = document.getElementById("name-error");
+
+
+
+
+
+
+
+        nameInput.addEventListener("input", function (event) {
+
+
+
+            const name = event.target.value;
+
+
+
+            const regex = /^[A-Za-z ]+$/;
+
+
+
+
+
+
+            if (!regex.test(name)) {
+
+
+
+                nameError.textContent = "Name must contain only letters and spaces.";
+
+
+
+                nameInput.setCustomValidity("Invalid");
+
+
+
+                nameInput.style.borderColor = "red";
+
+
+
+                nameInput.style.borderWidth = "4px";
+
+
+
+            } else {
+
+
+
+                nameError.textContent = "";
+
+
+
+                nameInput.setCustomValidity("");
+
+
+
+                nameInput.style.borderColor = "green";
+
+
+
+                nameInput.style.borderWidth = "4px";
+
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+        const emailInput = document.getElementById('email');
+
+
+
+
+
+
+        emailInput.addEventListener('input', () => {
+
+
+
+            const email = emailInput.value;
+
+
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+
+
+
+
+            if (emailPattern.test(email)) {
+
+
+
+
+
+
+
+                emailInput.style.borderColor = "green";
+
+
+
+                emailInput.style.borderWidth = "4px";
+
+
+
+            } else {
+
+
+
+
+                emailInput.style.borderColor = "red";
+
+
+
+                emailInput.style.borderWidth = "4px";
+
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+        const phoneNumberInput = document.getElementById('phone');
+
+
+
+
+
+
+        phoneNumberInput.addEventListener('input', () => {
+
+
+
+            const phoneNumber = phoneNumberInput.value;
+
+
+
+            const phonePattern = /^[6-9]\d{9}$/;
+
+
+
+
+
+
+            if (phonePattern.test(phoneNumber)) {
+
+
+
+
+
+
+
+                phoneNumberInput.style.borderColor = "green";
+
+
+
+                phoneNumberInput.style.borderWidth = "4px";
+
+
+
+            } else {
+
+
+
+
+
+
+
+                phoneNumberInput.style.borderColor = "red";
+
+
+
+                phoneNumberInput.style.borderWidth = "4px";
+
+
+
+            }
+
+
+
+        });
+
+
+
+        const acadDetails = document.getElementById("acadDetails");
+
+
+
+        const addAcadButton = document.getElementById("addAcad");
+
+
+
+
+
+
+        addAcadButton.addEventListener("click", function () {
+
+
+
+            const newAcadDetail = acadDetails.firstElementChild.cloneNode(true);
+
+
+
+
+
+
+            const inputs = newAcadDetail.querySelectorAll("input");
+
+
+
+
+
+
+            for (let i = 0; i < inputs.length; i++) {
+
+
+
+                inputs[i].value = "";
+
+
+
+            }
+
+
+
+
+
+
+            const removeAcadButton = document.createElement("button");
+
+
+
+            removeAcadButton.type = "button";
+
+
+
+            removeAcadButton.classList.add("removeAcad");
+
+
+
+            removeAcadButton.textContent = "Remove";
+
+
+
+            newAcadDetail.appendChild(removeAcadButton);
+
+
+
+            acadDetails.appendChild(newAcadDetail);
+
+
+
+
+
+
+        });
+
+
+
+
+
+
+        acadDetails.addEventListener("click", function (event) {
+
+
+
+            if (event.target.classList.contains("removeAcad")) {
+
+
+
+                event.target.parentElement.remove();
+
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+        const skills = document.querySelector(".skill");
+
+
+
+        const addskill = document.querySelector("#addSkill");
+
+
+
+        console.log(addskill);
+
+
+
+
+
+
+        addskill.addEventListener("click", function () {
+
+
+
+            const newSkill = skills.firstElementChild.cloneNode(true);
+
+
+
+            console.log(newSkill);
+
+
+
+            const inputs = newSkill.querySelectorAll("input");
+
+
+
+
+
+
+            for (let i = 0; i < inputs.length; i++) {
+
+
+
+                inputs[i].value = "";
+
+
+
+            }
+
+
+
+
+
+
+            const removeSkillButton = document.createElement("button");
+
+
+
+            removeSkillButton.type = "button";
+
+
+
+            removeSkillButton.classList.add("removeSkill");
+
+
+
+            removeSkillButton.textContent = "Remove";
+
+
+
+            newSkill.appendChild(removeSkillButton);
+
+
+
+            skills.appendChild(newSkill);
+
+
+
+
+
+
+        });
+
+
+
+
+
+
+        skills.addEventListener("click", function (event) {
+
+
+
+            if (event.target.classList.contains("removeSkill")) {
+
+
+
+                event.target.parentElement.remove();
+
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+        const projects = document.querySelector("#project");
+
+
+
+        const addProject = document.querySelector("#addProject");
+
+
+
+
+
+
+        addProject.addEventListener("click", function () {
+
+
+
+            const newProject = projects.firstElementChild.cloneNode(true);
+
+
+
+            const inputs = newProject.querySelectorAll("input");
+
+
+
+
+
+
+            for (let i = 0; i < inputs.length; i++) {
+
+
+
+                inputs[i].value = "";
+
+
+
+            }
+
+
+
+
+
+
+            const removeProjectButton = document.createElement("button");
+
+
+
+            removeProjectButton.type = "button";
+
+
+
+            removeProjectButton.classList.add("removeProject");
+
+
+
+            removeProjectButton.textContent = "Remove";
+
+
+
+            newProject.appendChild(removeProjectButton);
+
+
+
+            projects.appendChild(newProject);
+
+
+
+        });
+
+
+
+
+
+
+        projects.addEventListener("click", function (event) {
+
+
+
+            if (event.target.classList.contains("removeProject")) {
+
+
+
+                event.target.parentElement.remove();
+
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+        const language = document.querySelector(".lang");
+
+
+
+        const addLanguage = document.querySelector("#addLanguage");
+
+
+
+
+
+
+        addLanguage.addEventListener("click", function () {
+
+
+
+            const newLanguage = language.firstElementChild.cloneNode(true);
+
+
+
+            const inputs = newLanguage.querySelectorAll("input");
+
+
+
+
+
+
+            for (let i = 0; i < inputs.length; i++) {
+
+
+
+                inputs[i].value = "";
+
+
+
+            }
+
+
+
+
+
+
+            const removeLanguageButton = document.createElement("button");
+
+
+
+            removeLanguageButton.type = "button";
+
+
+
+            removeLanguageButton.classList.add("removeLanguage");
+
+
+
+            removeLanguageButton.textContent = "Remove";
+
+
+
+            newLanguage.appendChild(removeLanguageButton);
+
+
+
+            language.appendChild(newLanguage);
+
+
+
+        });
+
+
+
+
+
+
+        language.addEventListener("click", function (event) {
+
+
+
+            if (event.target.classList.contains("removeLanguage")) {
+
+
+
+                event.target.parentElement.remove();
+
+
+
+            }
+
+
+
+        });
+
+
+
+
+
+
+
+        const form = document.getElementById("form");
+
+
+
+        form.addEventListener("submit", function (event) {
+
+
+
+
+
+
+
+
+
+            const formData1 = [];
+
+
+
+            const formDetails1 = document.querySelectorAll(".details");
+
+
+
+
+
+
+            formDetails1.forEach(function (details) {
+
+
+
+                const degree = details.querySelector("input[name='deg[]']").value;
+
+
+
+                const college = details.querySelector("input[name='clg[]']").value;
+
+
+
+                const score = details.querySelector("input[name='score[]']").value;
+
+
+
+                const pyear = details.querySelector("input[name='pyear[]']").value;
+
+
+
+                const data = { degree, college, score, pyear };
+
+
+
+                formData1.push(data);
+                
+
+
+            });
+
+
+
+
+
+
+            const formData2 = [];
+
+
+
+            const formDetails2 = document.querySelectorAll(".skill");
+
+
+
+
+
+
+            formDetails2.forEach(function (skill) {
+
+
+
+                const skills = skill.querySelectorAll("select[name='skill1[]']");
+
+
+
+                const values = [];
+
+
+
+                skills.forEach(function (skill1) {
+
+
+
+                    values.push(skill1.value);
+
+
+
+                });
+
+
+
+                localStorage.setItem("formData2", JSON.stringify(values));
+
+
+
+            });
+
+
+
+
+
+
+            const formData3 = [];
+
+
+
+            const formDetails3 = document.querySelectorAll(".project");
+
+
+
+
+
+
+            formDetails3.forEach(function (project) {
+
+
+
+                const title = project.querySelector("input[name='project1[]']").value;
+
+
+
+                const desc = project.querySelector("textarea[name='p1d1[]']").value;
+
+
+
+                const data = { title, desc };
+
+
+
+                formData3.push(data);
+
+
+
+            });
+
+
+
+
+
+
+            const formData4 = [];
+
+
+
+            const formDetails4 = document.querySelectorAll(".lang");
+
+
+
+
+
+
+            formDetails4.forEach(function (language) {
+
+
+
+                const languages = language.querySelectorAll("select[name='lang1[]']");
+
+
+
+                const values = [];
+
+
+
+                languages.forEach(function (lang1) {
+
+
+
+                    values.push(lang1.value);
+
+
+
+                });
+
+
+
+                localStorage.setItem("formData4", JSON.stringify(values));
+
+
+
+            });
+
+
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const objective = document.getElementById("obj").value;
+
+            localStorage.setItem("name", name);
+            localStorage.setItem("email", email);
+            localStorage.setItem("phone", phone);
+            localStorage.setItem("obj", objective);
+
+
+            localStorage.setItem("formData1", JSON.stringify(formData1));
+
+
+
+            localStorage.setItem("formData3", JSON.stringify(formData3));
+
+
+
+
+
+
+            alert("Form data has been saved to local storage.");
+
+
+
+            window.location.href="newFinal.html";
+
+
+
+        });
+
+
+
+
+
+
+    </script>
+
+     
+
+</body>
+
+</html>

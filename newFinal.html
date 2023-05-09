@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My resume</title>
+    <style>
+      h1 {
+        text-align: center;
+        border: 2px solid black;
+        color: red;
+        font-family: Garamond, serif;
+      }
+
+      p {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+      }
+
+      table {
+        padding: 15px;
+        border-collapse: collapse;
+        margin-left: 80px;
+      }
+
+      #skills {
+        margin-left: 50px;
+        margin-right: auto;
+      }
+
+      th,
+      td {
+        border: 1px solid;
+        width: 800px;
+      }
+
+      th {
+        width: 50px;
+        background-color: #99ff99;
+      }
+
+      #text {
+        text-align: justify;
+      }
+
+      #obj {
+        margin-left: 80px;
+        margin-right: auto;
+        text-align: justify;
+      }
+
+      ul {
+        list-style-type: square;
+        margin-left: 50px;
+        margin-right: auto;
+        padding: 20px;
+      }
+
+      ul li {
+        color: darkblue;
+        margin-left: 35px;
+        padding: 5px;
+      }
+
+      body {
+        background-image: url("pic1.jpg");
+        background-size: cover;
+        background-position: 0 0;
+        background-repeat: no-repeat;
+      }
+
+      .img {
+        width: 20%;
+        height: 20%;
+        float: right;
+      }
+
+      #img {
+        width: 90%;
+        height: 100%;
+        vertical-align: top;
+      }
+
+      .listitem {
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="pdf">
+      <div>
+        <h1><span id="name"></span></h1>
+        <div class="img">
+          <img id="img" />
+          <br />
+          <input
+            type="button"
+            id="load"
+            value="load"
+            onclick="_LoadImage()"
+            onload="removeBtn()"
+          />
+          <br />
+        </div>
+        <p><b>E-mail:</b><span id="email"></span></p>
+        <p><b>Phone:</b><span id="phone"></span></p>
+
+                 
+        <h2>Objective</h2>
+        <p id="obj"><span id="Obj"></span></p>
+        <h2>Education</h2>
+        <table class="education">
+          <tr>
+            <th id="course">Course/Degree</th>
+            <th id="edu">School/University</th>
+            <th id="grade">Grade/Score</th>
+            <th id="pass">Passing Year</th>
+          </tr>
+        </table>
+        <br />
+        <h2>Skills</h2>
+        <ul id="skills"></ul>
+
+        <h2>Projects</h2>
+        <ul id="projects"></ul>
+
+        <h2>Languages</h2>
+        <ul id="lang"></ul>
+      </div>
+    </div>
+    <button id="btn" onclick="generate()">Generate PDF</button>
+
+     
+
+    <script>
+      function generate() {
+        var button = document.getElementById("btn");
+        button.remove();
+        window.print();
+      }
+      const name = localStorage.getItem("name");
+      document.getElementById("name").textContent = name;
+      const mail = localStorage.getItem("email");
+      document.getElementById("email").textContent = mail;
+      const ph = localStorage.getItem("phone");
+      document.getElementById("phone").textContent = ph;
+
+      const table = document.querySelector(".education");
+
+      let formData1 = localStorage.getItem("formData1");
+      formData1 = JSON.parse(formData1);
+
+      formData1.forEach((formData) => {
+        const tr = document.createElement("tr");
+        const td1 = document.createElement("td");
+        td1.textContent = formData.degree;
+
+        const td2 = document.createElement("td");
+        td2.textContent = formData.college;
+
+        const td3 = document.createElement("td");
+        td3.textContent = formData.score;
+
+        const td4 = document.createElement("td");
+        td4.textContent = formData.pyear;
+
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+
+        table.appendChild(tr);
+      });
+
+      let formData2 = localStorage.getItem("formData2");
+      const skills = document.querySelector("#skills");
+      formData2 = JSON.parse(formData2);
+
+      formData2.forEach((formData) => {
+        const li = document.createElement("li");
+        li.classList.add("listitem");
+        li.textContent = formData;
+        skills.appendChild(li);
+      });
+
+      let formData3 = localStorage.getItem("formData3");
+      formData3 = JSON.parse(formData3);
+      const projects = document.querySelector("#projects");
+
+      formData3.forEach((formData) => {
+        const li = document.createElement("li");
+        const description = document.createElement("p");
+        const title = document.createElement("p");
+        description.textContent = `Description: ${formData.desc}`;
+        title.textContent = `Title: ${formData.title}`;
+
+        li.appendChild(title);
+        li.appendChild(description);
+
+        projects.appendChild(li);
+      });
+
+      let formData4 = localStorage.getItem("formData4");
+      formData4 = JSON.parse(formData4);
+      const lang = document.querySelector("#lang");
+
+      formData4.forEach((formData) => {
+        const li = document.createElement("li");
+        li.classList.add("listitem");
+        li.textContent = formData;
+        lang.appendChild(li);
+      });
+
+      const Objective = localStorage.getItem("obj");
+      document.getElementById("Obj").textContent = Objective;
+
+      const _LoadImage = () => {
+        if (localStorage.getItem("img")) {
+          console.log("pass");
+          document.querySelector("#img").src = localStorage.getItem("img");
+          console.log("success");
+          var btn = document.getElementById("load");
+          btn.remove();
+          console.log("done");
+        } else {
+          console.log("failed");
+        }
+      };
+    </script>
+  </body>
+</html>
